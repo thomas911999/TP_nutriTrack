@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* CONTENU PRINCIPAL (2/3 GAUCHE) */
+.content {
+    flex: 2;
+    padding: 20px;
+    background: #ecf0f1;
+    overflow-y: auto;
+}
+
+/* NAVBAR À DROITE (1/3) */
+.sidebar {
+    flex: 1;
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.sidebar ul li a:hover {
+    background: #34495e;
+}
+
+/* SECTIONS (Affichage conditionnel) */
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+/* FORMULAIRE */
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+}
+
+input, button {
+    margin: 5px 0;
+    padding: 10px;
+}
+
+button {
+    background: #27ae60;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #219150;
+}

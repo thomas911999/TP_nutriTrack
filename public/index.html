@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUtritrack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Dashboard Header -->
+        <header class="dashboard-header">
+            <div class="header">
+                <h1>Tracker de Repas</h1>
+            </div>
+            <div class="user-info">
+                <span id="user-name"></span>
+                <button id="logout-btn" class="btn btn-danger">Déconnexion</button>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="card">
+                    <h3>Calories</h3>
+                    <div class="progress-bar" id="calories-progress">
+                        <div class="progress"></div>
+                    </div>
+                    <p><span id="calories-value">0</span> / <span id="calories-goal">0</span> kcal</p>
+                </div>
+                <div class="card">
+                    <h3>Protéines</h3>
+                    <div class="progress-bar" id="protein-progress">
+                        <div class="progress"></div>
+                    </div>
+                    <p><span id="protein-value">0</span> / <span id="protein-goal">0</span> g</p>
+                </div>
+                <div class="card">
+                    <h3>Glucides</h3>
+                    <div class="progress-bar" id="carbs-progress">
+                        <div class="progress"></div>
+                    </div>
+                    <p><span id="carbs-value">0</span> / <span id="carbs-goal">0</span> g</p>
+                </div>
+                <div class="card">
+                    <h3>Lipides</h3>
+                    <div class="progress-bar" id="fat-progress">
+                        <div class="progress"></div>
+                    </div>
+                    <p><span id="fat-value">0</span> / <span id="fat-goal">0</span> g</p>
+                </div>
+            </div>
+
+            <!-- Add Meal Form -->
+            <section class="add-meal-section">
+                <h2>Ajouter un Repas</h2>
+                <form id="meal-form">
+                    <input type="text" id="meal-name" placeholder="Nom du repas" required>
+                    <div class="nutrient-inputs">
+                        <input type="number" id="meal-calories" placeholder="Calories" required>
+                        <input type="number" id="meal-protein" placeholder="Protéines (g)" required>
+                        <input type="number" id="meal-carbs" placeholder="Glucides (g)" required>
+                        <input type="number" id="meal-fat" placeholder="Lipides (g)" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter le Repas</button>
+                </form>
+            </section>
+
+            <!-- Meals List -->
+            <section class="meals-section">
+                <h2>Mes Repas du Jour</h2>
+                <div id="meals-list"></div>
+            </section>
+
+            <!-- Statistics -->
+            <section class="stats-section">
+                <h2>Statistiques</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Meilleurs Repas</h3>
+                        <div id="top-meals"></div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Recommandations</h3>
+                        <div id="recommendations"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
