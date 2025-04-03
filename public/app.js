@@ -392,7 +392,7 @@ function updateRecommendations(totals, goals) {
     const nutrients = {
         'calories': { current: totals.calories, goal: goals.calories, unit: 'kcal', foods: [] },
         'proteine': { current: totals.protein, goal: goals.proteine, unit: 'g', foods: ['poulet', 'oeufs', 'thon', 'fromage blanc', 'légumineuses'] },
-        'glucide': { current: totals.carbs, goal: goals.glucide, unit: 'g', foods: ['riz', 'pâtes', 'pain', 'pommes de terre', 'fruits'] },
+        'glucide': { current: totals.carbs, goal: goals.glucide, unit: 'g', foods: ['riz', 'pâtes', 'pain complet', 'pommes de terre', 'fruits'] },
         'lipide': { current: totals.fat, goal: goals.lipide, unit: 'g', foods: ['huile d\'olive', 'avocat', 'noix', 'poisson gras', 'fromage'] }
     };
 
@@ -405,14 +405,22 @@ function updateRecommendations(totals, goals) {
             // Manque de nutriments
             if (type === 'calories') {
                 recommendations.push(`<div class="recommendation warning"><i class="fas fa-exclamation-triangle"></i> Il vous manque ${difference} ${unit} pour atteindre votre objectif quotidien</div>`);
-            } else if (foods && foods.length > 0) {
-                // Suggérer des aliments spécifiques
+            } else if (type === 'proteine') {
+                recommendations.push(`<div class="recommendation warning"><i class="fas fa-exclamation-triangle"></i> Vous avez besoin de ${difference}g de protéines supplémentaires</div>`);
+            } else if (type === 'glucide') {
+                recommendations.push(`<div class="recommendation warning"><i class="fas fa-exclamation-triangle"></i> Vous avez besoin de ${difference}g de glucides supplémentaires</div>`);
+            } else if (type === 'lipide') {
+                recommendations.push(`<div class="recommendation warning"><i class="fas fa-exclamation-triangle"></i> Vous avez besoin de ${difference}g de lipides supplémentaires</div>`);
+            }
+            
+            // Suggérer des aliments spécifiques
+            if (foods && foods.length > 0) {
                 const randomFoods = foods.sort(() => 0.5 - Math.random()).slice(0, 2);
-                recommendations.push(`<div class="recommendation tip"><i class="fas fa-lightbulb"></i> Vous avez atteint ${percentage}% de votre objectif de ${type}. Essayez de manger: ${randomFoods.join(', ')}</div>`);
+                recommendations.push(`<div class="recommendation tip"><i class="fas fa-lightbulb"></i> Pour augmenter votre apport en ${type}, essayez de manger: ${randomFoods.join(', ')}</div>`);
             }
         } else if (percentage > 110) {
             // Excès de nutriments
-            recommendations.push(`<div class="recommendation warning"><i class="fas fa-exclamation-circle"></i> Vous avez dépassé votre objectif de ${type} de ${Math.abs(difference)} ${unit}</div>`);
+            recommendations.push(`<div class="recommendation warning"><i class="fas fa-exclamation-circle"></i> Attention! Vous avez dépassé votre objectif de ${type} de ${Math.abs(difference)} ${unit}</div>`);
         } else if (percentage >= 90 && percentage <= 110) {
             // Bon équilibre
             recommendations.push(`<div class="recommendation success"><i class="fas fa-check-circle"></i> Excellent! Votre apport en ${type} est bien équilibré</div>`);
@@ -422,6 +430,7 @@ function updateRecommendations(totals, goals) {
     // Ajouter des conseils généraux si peu de recommandations
     if (recommendations.length < 2) {
         recommendations.push(`<div class="recommendation tip"><i class="fas fa-info-circle"></i> Conseil: Buvez au moins 2L d'eau par jour pour une meilleure hydratation</div>`);
+        recommendations.push(`<div class="recommendation tip"><i class="fas fa-info-circle"></i> N'oubliez pas de varier vos repas pour une alimentation équilibrée</div>`);
     }
 
     recommendationsDiv.innerHTML = recommendations.join('');
