@@ -143,15 +143,6 @@ async function loadMeals() {
         updateMealsDisplay(data.meals);
         updateProgressBars(data.dailyTotals, data.goals);
         
-        // Afficher les recommandations si elles existent
-        if (data.recommendations && data.recommendations.length > 0) {
-            const recommendationsDiv = document.getElementById('recommendations');
-            if (recommendationsDiv) {
-                recommendationsDiv.innerHTML = data.recommendations
-                    .map(rec => `<p>${rec}</p>`)
-                    .join('');
-            }
-        }
         
         return data;
     } catch (error) {
@@ -391,9 +382,9 @@ function updateRecommendations(totals, goals) {
     // Vérifier chaque nutriment
     const nutrients = {
         'calories': { current: totals.calories, goal: goals.calories, unit: 'kcal', foods: [] },
-        'proteine': { current: totals.protein, goal: goals.proteine, unit: 'g', foods: ['poulet', 'oeufs', 'thon', 'fromage blanc', 'légumineuses'] },
-        'glucide': { current: totals.carbs, goal: goals.glucide, unit: 'g', foods: ['riz', 'pâtes', 'pain complet', 'pommes de terre', 'fruits'] },
-        'lipide': { current: totals.fat, goal: goals.lipide, unit: 'g', foods: ['huile d\'olive', 'avocat', 'noix', 'poisson gras', 'fromage'] }
+        'proteine': { current: totals.proteine, goal: goals.proteine, unit: 'g', foods: ['poulet', 'oeufs', 'thon', 'fromage blanc', 'légumineuses'] },
+        'glucide': { current: totals.glucide, goal: goals.glucide, unit: 'g', foods: ['riz', 'pâtes', 'pain complet', 'pommes de terre', 'fruits'] },
+        'lipide': { current: totals.lipide, goal: goals.lipide, unit: 'g', foods: ['huile d\'olive', 'avocat', 'noix', 'poisson gras', 'fromage'] }
     };
 
     // Générer des recommandations spécifiques

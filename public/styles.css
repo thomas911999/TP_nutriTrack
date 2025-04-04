@@ -21,10 +21,10 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-    padding: 20px;
+    padding: 25px;
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-header h1 {
@@ -46,22 +46,13 @@ body {
     transition: background-color 0.3s;
 }
 
-.btn-primary {
-    background-color: #4CAF50;
+.btn-primary, .btn-danger {
+    background-color: #2196F3;
     color: white;
 }
 
-.btn-primary:hover {
-    background-color: #45a049;
-}
-
-.btn-danger {
-    background-color: #f44336;
-    color: white;
-}
-
-.btn-danger:hover {
-    background-color: #da190b;
+.btn-primary:hover, .btn-danger:hover {
+    background-color: #1976D2;
 }
 
 .summary-cards {
@@ -73,9 +64,14 @@ body {
 
 .card {
     background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
 }
 
 .card h3 {
@@ -93,7 +89,7 @@ body {
 
 .progress {
     height: 100%;
-    background-color: #4CAF50;
+    background-color: #2196F3;
     transition: width 0.3s;
 }
 
@@ -126,8 +122,8 @@ input {
 
 input:focus {
     outline: none;
-    border-color: #4CAF50;
-    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    border-color: #2196F3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
 }
 
 .meals-section {
@@ -266,4 +262,20 @@ input:focus {
     font-size: 30px;
     margin-bottom: 10px;
     opacity: 0.5;
+}
+
+.error-message {
+    color: #f44336;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #ffebee;
+}
+
+.success-message {
+    color: #4CAF50;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #e8f5e9;
 }

@@ -42,31 +42,36 @@ const getMeals = asyncHandler(async (req, res) => {
             createdAt: { $gte: today }
         });
         
-        // Convertir les noms des champs du franu00e7ais vers l'anglais pour le frontend
         const meals = mealsFromDb.map(meal => ({
             _id: meal._id,
             name: meal.name,
-            calories: meal.calorie,    // Garder calories pour compatibilitu00e9 frontend
-            protein: meal.proteine,    // Garder protein pour compatibilitu00e9 frontend
-            carbs: meal.glucide,       // Garder carbs pour compatibilitu00e9 frontend
-            fat: meal.lipide,          // Garder fat pour compatibilitu00e9 frontend
-            proteine: meal.proteine,   // Ajouter les noms en franu00e7ais
-            glucide: meal.glucide,     // Ajouter les noms en franu00e7ais
-            lipide: meal.lipide,       // Ajouter les noms en franu00e7ais
+            calories: meal.calorie,
+            proteine: meal.proteine,
+            glucide: meal.glucide,
+            lipide: meal.lipide,
             createdAt: meal.createdAt,
             updatedAt: meal.updatedAt
         }));
 
+        // Ajouter les références en anglais pour la compatibilité avec le frontend existant
+        meals.forEach(meal => {
+            meal.protein = meal.proteine;
+            meal.carbs = meal.glucide;
+            meal.fat = meal.lipide;
+        });
+
         // Calculer les totaux journaliers avec les noms en franu00e7ais
         const dailyTotals = {
             calories: meals.reduce((sum, meal) => sum + meal.calories, 0),
-            protein: meals.reduce((sum, meal) => sum + meal.protein, 0),  // Garder pour compatibilitu00e9
-            carbs: meals.reduce((sum, meal) => sum + meal.carbs, 0),      // Garder pour compatibilitu00e9
-            fat: meals.reduce((sum, meal) => sum + meal.fat, 0),          // Garder pour compatibilitu00e9
             proteine: meals.reduce((sum, meal) => sum + meal.proteine, 0),
             glucide: meals.reduce((sum, meal) => sum + meal.glucide, 0),
             lipide: meals.reduce((sum, meal) => sum + meal.lipide, 0)
         };
+
+        // Ajouter les références en anglais pour la compatibilité
+        dailyTotals.protein = dailyTotals.proteine;
+        dailyTotals.carbs = dailyTotals.glucide;
+        dailyTotals.fat = dailyTotals.lipide;
         
         const goals = await Goal.findOne({ user: req.user.id }) || { calories: 2000, protein: 70, carbs: 250, fat: 70 };
         const recommendations = generateRecommendations(dailyTotals, goals);
